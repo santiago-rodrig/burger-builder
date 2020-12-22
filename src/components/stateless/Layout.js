@@ -1,12 +1,12 @@
 import React from "react";
-import Aux from "../higuerOrder/Aux";
+import classes from "../../styles/index.css";
 
 const Layout = (props) => {
   return (
-    <Aux>
-      <div>Toolbar, Sidedrawer, Backdrop</div>
-      <main>{props.children}</main>
-    </Aux>
+    <div>
+      <div>Toolbar, SideDrawer, Backdrop</div>
+      <main className={classes.mt5}>{props.children}</main>
+    </div>
   );
 };
 

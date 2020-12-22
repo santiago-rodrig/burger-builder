@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import Layout from "../stateless/Layout";
+import BurgerBuilder from "./BurgerBuilder";
 
 class App extends Component {
   render() {
     return (
       <Layout>
-        <p>Does this work?</p>
+        <BurgerBuilder />
       </Layout>
     );
   }
