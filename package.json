@@ -90,5 +90,8 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "devDependencies": {
+    "prop-types": "^15.7.2"
   }
 }
