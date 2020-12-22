@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classes from "../../styles/BurgerControl.css";
+import BurgerContext from "../../contexts/Burger";
 
 const BurgerControl = (props) => {
   return (
@@ -8,8 +9,21 @@ const BurgerControl = (props) => {
       <div className={classes.IngredientLabel}>
         {props.ingredientDescriptor.label}
       </div>
-      <button className={classes.Less}>Less</button>
-      <button className={classes.More}>More</button>
+      <BurgerContext.Consumer>
+        {(context) => (
+          <React.Fragment>
+            <button className={classes.Less}>Less</button>
+            <button
+              className={classes.More}
+              onClick={() =>
+                context.addIngredient(props.ingredientDescriptor.type)
+              }
+            >
+              More
+            </button>
+          </React.Fragment>
+        )}
+      </BurgerContext.Consumer>
     </div>
   );
 };
