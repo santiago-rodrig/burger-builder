@@ -4,7 +4,7 @@ import classes from "../../styles/Burger.css";
 import PropTypes from "prop-types";
 
 const Burger = (props) => {
-  const ingredientsJsx = props.ingredients.reduce((accumulator, ingredient) => {
+  let ingredientsJsx = props.ingredients.reduce((accumulator, ingredient) => {
     for (let i = 0; i < ingredient.quantity; i += 1) {
       accumulator.push(
         <BurgerIngredient
@@ -16,6 +16,10 @@ const Burger = (props) => {
 
     return accumulator;
   }, []);
+
+  if (ingredientsJsx.length === 0) {
+    ingredientsJsx = <p>Please start adding ingredients!</p>;
+  }
 
   return (
     <div className={classes.Burger}>

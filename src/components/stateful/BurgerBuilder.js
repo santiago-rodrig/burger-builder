@@ -7,12 +7,7 @@ class BurgerBuilder extends React.Component {
     super(props);
 
     this.state = {
-      ingredients: [
-        { type: "salad", quantity: 1 },
-        { type: "bacon", quantity: 1 },
-        { type: "cheese", quantity: 2 },
-        { type: "meat", quantity: 2 },
-      ],
+      ingredients: [],
     };
   }
 
