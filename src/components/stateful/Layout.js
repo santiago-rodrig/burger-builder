@@ -2,26 +2,36 @@ import React from "react";
 import classes from "../../styles/Layout.css";
 import Toolbar from "../stateless/Toolbar";
 import SideDrawer from "../stateless/SideDrawer";
+import LayoutContext from "../../contexts/Layout";
 
 class Layout extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      sideDrawerOpen: true,
+      sideDrawerOpen: false,
     };
 
     this.handleCloseSideDrawer = this.handleCloseSideDrawer.bind(this);
+    this.handleOpenSideDrawer = this.handleOpenSideDrawer.bind(this);
   }
 
   handleCloseSideDrawer() {
     this.setState({ sideDrawerOpen: false });
   }
 
+  handleOpenSideDrawer() {
+    this.setState({ sideDrawerOpen: true });
+  }
+
   render() {
     return (
       <div>
-        <Toolbar />
+        <LayoutContext.Provider
+          value={{ openSideDrawer: this.handleOpenSideDrawer }}
+        >
+          <Toolbar />
+        </LayoutContext.Provider>
         <SideDrawer
           open={this.state.sideDrawerOpen}
           handleClose={this.handleCloseSideDrawer}
