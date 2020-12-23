@@ -2,6 +2,7 @@ import React from "react";
 import classes from "../../styles/Modal.css";
 import Backrop from "./Backdrop";
 import BurgerContext from "../../contexts/Burger";
+import PropTypes from "prop-types";
 
 const Modal = (props) => {
   return (
@@ -27,6 +28,10 @@ const Modal = (props) => {
       )}
     </BurgerContext.Consumer>
   );
+};
+
+Modal.propTypes = {
+  children: PropTypes.node,
 };
 
 export default Modal;

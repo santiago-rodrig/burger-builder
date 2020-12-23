@@ -49,6 +49,7 @@ OrderSummary.propTypes = {
       quantity: PropTypes.number,
     })
   ).isRequired,
+
   price: PropTypes.number.isRequired,
 };
 
