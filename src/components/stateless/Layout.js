@@ -1,11 +1,12 @@
 import React from "react";
-import classes from "../../styles/index.css";
+import classes from "../../styles/Layout.css";
+import Toolbar from "./Toolbar";
 
 const Layout = (props) => {
   return (
     <div>
-      <div>Toolbar, SideDrawer, Backdrop</div>
-      <main className={classes.mt5}>{props.children}</main>
+      <Toolbar />
+      <main className={classes.Content}>{props.children}</main>
     </div>
   );
 };
