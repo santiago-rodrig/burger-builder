@@ -19,7 +19,10 @@ const Modal = (props) => {
           >
             {props.children}
           </div>
-          <Backrop show={context.purchasingMode} />
+          <Backrop
+            open={context.purchasingMode}
+            handleClick={context.deactivatePurchasingMode}
+          />
         </React.Fragment>
       )}
     </BurgerContext.Consumer>

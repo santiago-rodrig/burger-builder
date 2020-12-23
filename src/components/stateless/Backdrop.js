@@ -1,25 +1,22 @@
 import React from "react";
 import classes from "../../styles/Backdrop.css";
-import BurgerContext from "../../contexts/Burger";
+import PropTypes from "prop-types";
 
-const Backdrop = () => {
+const Backdrop = (props) => {
   let renderedJsx = null;
-  const burgerContext = React.useContext(BurgerContext);
 
-  if (burgerContext.purchasingMode) {
+  if (props.open) {
     renderedJsx = (
-      <BurgerContext.Consumer>
-        {(context) => (
-          <div
-            onClick={context.deactivatePurchasingMode}
-            className={classes.Backdrop}
-          ></div>
-        )}
-      </BurgerContext.Consumer>
+      <div onClick={props.handleClick} className={classes.Backdrop}></div>
     );
   }
 
   return renderedJsx;
+};
+
+Backdrop.propTypes = {
+  handleClick: PropTypes.func.isRequired,
+  open: PropTypes.bool,
 };
 
 export default Backdrop;

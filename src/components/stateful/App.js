@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Layout from "../stateless/Layout";
+import Layout from "./Layout";
 import BurgerBuilder from "./BurgerBuilder";
 
 class App extends Component {
