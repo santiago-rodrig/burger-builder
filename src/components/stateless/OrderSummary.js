@@ -2,45 +2,46 @@ import React from "react";
 import PropTypes from "prop-types";
 import Aux from "../higuerOrder/Aux";
 import Button from "./Button";
-import BurgerContext from "../../contexts/Burger";
 
-const OrderSummary = (props) => {
-  const ingredientItemsJsx = props.ingredients.map((ingredient, index) => (
-    <li
-      key={`${ingredient.type}${index}-item`}
-      style={{ textTransform: "capitalize" }}
-    >
-      {ingredient.type} x {ingredient.quantity}
-    </li>
-  ));
+class OrderSummary extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    return nextProps.purchasing;
+  }
 
-  return (
-    <Aux>
-      <h3>Your order</h3>
-      <p>A delicious burger with the following ingredients:</p>
-      <ul>{ingredientItemsJsx}</ul>
-      <p>
-        <strong>Total Price:</strong> $ {props.price.toFixed(2)}
-      </p>
-      <p>Continue to checkout?</p>
-      <BurgerContext.Consumer>
-        {(context) => (
-          <React.Fragment>
-            <Button
-              type="danger"
-              handleClick={context.deactivatePurchasingMode}
-            >
-              CANCEL
-            </Button>
-            <Button type="success" handleClick={context.purchase}>
-              CONTINUE
-            </Button>
-          </React.Fragment>
-        )}
-      </BurgerContext.Consumer>
-    </Aux>
-  );
-};
+  render() {
+    const ingredientItemsJsx = this.props.ingredients.map(
+      (ingredient, index) => (
+        <li
+          key={`${ingredient.type}${index}-item`}
+          style={{ textTransform: "capitalize" }}
+        >
+          {ingredient.type} x {ingredient.quantity}
+        </li>
+      )
+    );
+
+    return (
+      <Aux>
+        <h3>Your order</h3>
+        <p>A delicious burger with the following ingredients:</p>
+        <ul>{ingredientItemsJsx}</ul>
+        <p>
+          <strong>Total Price:</strong> $ {this.props.price.toFixed(2)}
+        </p>
+        <p>Continue to checkout?</p>
+        <Button
+          type="danger"
+          handleClick={this.props.handlePurchasingModeDeactivation}
+        >
+          CANCEL
+        </Button>
+        <Button type="success" handleClick={this.props.handlePurchase}>
+          CONTINUE
+        </Button>
+      </Aux>
+    );
+  }
+}
 
 OrderSummary.propTypes = {
   ingredients: PropTypes.arrayOf(
@@ -51,6 +52,9 @@ OrderSummary.propTypes = {
   ).isRequired,
 
   price: PropTypes.number.isRequired,
+  handlePurchasingModeDeactivation: PropTypes.func.isRequired,
+  handlePurchase: PropTypes.func.isRequired,
+  purchasing: PropTypes.bool,
 };
 
 export default OrderSummary;

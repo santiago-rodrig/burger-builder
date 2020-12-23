@@ -120,9 +120,6 @@ class BurgerBuilder extends React.Component {
           noIngredients: this.state.noIngredients,
           addIngredient: this.handleAddIngredient,
           removeIngredient: this.handleRemoveIngredient,
-          deactivatePurchasingMode: this.handlePurchasingDeactivation,
-          purchasingMode: this.state.purchasing,
-          purchase: this.handlePurchase,
         }}
       >
         <Burger ingredients={this.state.ingredients} />
@@ -133,10 +130,16 @@ class BurgerBuilder extends React.Component {
           )}
           activatePurchasingMode={this.handlePurchasingActivation}
         />
-        <Modal show={this.state.purchasing}>
+        <Modal
+          open={this.state.purchasing}
+          handleClose={this.handlePurchasingDeactivation}
+        >
           <OrderSummary
             ingredients={this.state.ingredients}
             price={this.state.price}
+            handlePurchasingModeDeactivation={this.handlePurchasingActivation}
+            handlePurchase={this.handlePurchase}
+            purchasing={this.state.purchasing}
           />
         </Modal>
       </BurgerContext.Provider>
