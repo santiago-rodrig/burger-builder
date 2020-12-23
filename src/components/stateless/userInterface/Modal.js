@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "../../styles/Modal.css";
+import classes from "../../../styles/Modal.css";
 import Backrop from "./Backdrop";
 import PropTypes from "prop-types";
 

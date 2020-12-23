@@ -1,9 +1,9 @@
 import React from "react";
-import Burger from "../stateless/Burguer";
-import BurgerControls from "../stateless/BurgerControls";
+import Burger from "../stateless/BurgerBuilder/Burguer";
+import BurgerControls from "../stateless/BurgerBuilder/BurgerControls";
 import BurgerContext from "../../contexts/Burger";
-import Modal from "../stateless/Modal";
-import OrderSummary from "../stateless/OrderSummary";
+import Modal from "../stateless/userInterface/Modal";
+import OrderSummary from "../stateless/BurgerBuilder/OrderSummary";
 
 const INGREDIENT_PRICES = {
   salad: 0.5,

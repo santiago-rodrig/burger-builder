@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "../../styles/Backdrop.css";
+import classes from "../../../styles/Backdrop.css";
 import PropTypes from "prop-types";
 
 const Backdrop = (props) => {

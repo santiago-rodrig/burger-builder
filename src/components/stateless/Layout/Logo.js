@@ -1,6 +1,6 @@
 import React from "react";
-import BurgerImage from "../../images/burgerLogo.png";
-import classes from "../../styles/Logo.css";
+import BurgerImage from "../../../images/burgerLogo.png";
+import classes from "../../../styles/Logo.css";
 import PropTypes from "prop-types";
 
 const Logo = (props) => {

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import classes from "../../styles/BurgerControl.css";
-import BurgerContext from "../../contexts/Burger";
+import classes from "../../../styles/BurgerControl.css";
+import BurgerContext from "../../../contexts/Burger";
 
 const BurgerControl = (props) => {
   return (

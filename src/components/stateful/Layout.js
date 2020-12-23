@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "../../styles/Layout.css";
-import Toolbar from "../stateless/Toolbar";
-import SideDrawer from "../stateless/SideDrawer";
+import Toolbar from "../stateless/Layout/Toolbar";
+import SideDrawer from "../stateless/Layout/SideDrawer";
 import LayoutContext from "../../contexts/Layout";
 
 class Layout extends React.Component {

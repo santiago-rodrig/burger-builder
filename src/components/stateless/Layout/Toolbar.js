@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "../../styles/Toolbar.css";
+import classes from "../../../styles/Toolbar.css";
 import Logo from "./Logo";
 import NavigationItems from "./NavigationItems";
 import SideDrawerOpener from "./SideDrawerOpener";

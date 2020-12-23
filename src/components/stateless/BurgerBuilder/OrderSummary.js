@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Aux from "../higuerOrder/Aux";
-import Button from "./Button";
+import Aux from "../../higuerOrder/Aux";
+import Button from "../userInterface/Button";
 
 class OrderSummary extends React.Component {
   shouldComponentUpdate(nextProps) {

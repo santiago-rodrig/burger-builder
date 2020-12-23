@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import BurgerControl from "./BurgerControl";
-import classes from "../../styles/BurgerControls.css";
+import classes from "../../../styles/BurgerControls.css";
 
 const BurgerControls = (props) => {
   return (
