@@ -99,7 +99,7 @@ class BurgerBuilder extends React.Component {
         }}
       >
         <Burger ingredients={this.state.ingredients} />
-        <BurgerControls />
+        <BurgerControls price={this.state.price} />
       </BurgerContext.Provider>
     );
   }
