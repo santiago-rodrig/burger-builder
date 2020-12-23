@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Aux from "../higuerOrder/Aux";
+import Button from "./Button";
+import BurgerContext from "../../contexts/Burger";
 
 const OrderSummary = (props) => {
   const ingredientItemsJsx = props.ingredients.map((ingredient, index) => (
@@ -18,8 +20,21 @@ const OrderSummary = (props) => {
       <p>A delicious burger with the following ingredients:</p>
       <ul>{ingredientItemsJsx}</ul>
       <p>Continue to checkout?</p>
-      <button>CANCEL</button>
-      <button>CONTINUE</button>
+      <BurgerContext.Consumer>
+        {(context) => (
+          <React.Fragment>
+            <Button
+              type="danger"
+              handleClick={context.deactivatePurchasingMode}
+            >
+              CANCEL
+            </Button>
+            <Button type="success" handleClick={context.purchase}>
+              CONTINUE
+            </Button>
+          </React.Fragment>
+        )}
+      </BurgerContext.Consumer>
     </Aux>
   );
 };

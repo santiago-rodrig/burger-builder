@@ -76,6 +76,10 @@ class BurgerBuilder extends React.Component {
     this.setState({ purchasing: false });
   }
 
+  handlePurchase() {
+    window.alert("Purchased!");
+  }
+
   handleRemoveIngredient(type) {
     this.setState((previousState) => {
       const ingredientIndex = previousState.ingredients.findIndex(
@@ -118,6 +122,7 @@ class BurgerBuilder extends React.Component {
           removeIngredient: this.handleRemoveIngredient,
           deactivatePurchasingMode: this.handlePurchasingDeactivation,
           purchasingMode: this.state.purchasing,
+          purchase: this.handlePurchase,
         }}
       >
         <Burger ingredients={this.state.ingredients} />
