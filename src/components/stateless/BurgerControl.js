@@ -12,7 +12,15 @@ const BurgerControl = (props) => {
       <BurgerContext.Consumer>
         {(context) => (
           <React.Fragment>
-            <button className={classes.Less}>Less</button>
+            <button
+              className={classes.Less}
+              onClick={() =>
+                context.removeIngredient(props.ingredientDescriptor.type)
+              }
+              disabled={context.noIngredients[props.ingredientDescriptor.type]}
+            >
+              Less
+            </button>
             <button
               className={classes.More}
               onClick={() =>
