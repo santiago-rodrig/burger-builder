@@ -13,12 +13,16 @@ const BurgerControls = (props) => {
         ingredientDescriptor={{ label: "Cheese", type: "cheese" }}
       />
       <BurgerControl ingredientDescriptor={{ label: "Meat", type: "meat" }} />
+      <button className={classes.OrderButton} disabled={!props.purchasable}>
+        ORDER NOW
+      </button>
     </div>
   );
 };
 
 BurgerControls.propTypes = {
-  price: PropTypes.number,
+  price: PropTypes.number.isRequired,
+  purchasable: PropTypes.bool.isRequired,
 };
 
 export default BurgerControls;

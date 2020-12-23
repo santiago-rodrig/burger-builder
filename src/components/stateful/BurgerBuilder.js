@@ -17,6 +17,7 @@ class BurgerBuilder extends React.Component {
     this.state = {
       ingredients: [],
       price: 4,
+
       noIngredients: {
         salad: true,
         bacon: true,
@@ -99,7 +100,12 @@ class BurgerBuilder extends React.Component {
         }}
       >
         <Burger ingredients={this.state.ingredients} />
-        <BurgerControls price={this.state.price} />
+        <BurgerControls
+          price={this.state.price}
+          purchasable={Object.values(this.state.noIngredients).some(
+            (noIngredient) => !noIngredient
+          )}
+        />
       </BurgerContext.Provider>
     );
   }
