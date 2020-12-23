@@ -2,6 +2,8 @@ import React from "react";
 import Burger from "../stateless/Burguer";
 import BurgerControls from "../stateless/BurgerControls";
 import BurgerContext from "../../contexts/Burger";
+import Modal from "../stateless/Modal";
+import OrderSummary from "../stateless/OrderSummary";
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -106,6 +108,9 @@ class BurgerBuilder extends React.Component {
             (noIngredient) => !noIngredient
           )}
         />
+        <Modal>
+          <OrderSummary ingredients={this.state.ingredients} />
+        </Modal>
       </BurgerContext.Provider>
     );
   }
