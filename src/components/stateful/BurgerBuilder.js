@@ -134,7 +134,10 @@ class BurgerBuilder extends React.Component {
           activatePurchasingMode={this.handlePurchasingActivation}
         />
         <Modal show={this.state.purchasing}>
-          <OrderSummary ingredients={this.state.ingredients} />
+          <OrderSummary
+            ingredients={this.state.ingredients}
+            price={this.state.price}
+          />
         </Modal>
       </BurgerContext.Provider>
     );

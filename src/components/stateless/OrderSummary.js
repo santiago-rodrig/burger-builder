@@ -19,6 +19,9 @@ const OrderSummary = (props) => {
       <h3>Your order</h3>
       <p>A delicious burger with the following ingredients:</p>
       <ul>{ingredientItemsJsx}</ul>
+      <p>
+        <strong>Total Price:</strong> $ {props.price.toFixed(2)}
+      </p>
       <p>Continue to checkout?</p>
       <BurgerContext.Consumer>
         {(context) => (
@@ -46,6 +49,7 @@ OrderSummary.propTypes = {
       quantity: PropTypes.number,
     })
   ).isRequired,
+  price: PropTypes.number.isRequired,
 };
 
 export default OrderSummary;
