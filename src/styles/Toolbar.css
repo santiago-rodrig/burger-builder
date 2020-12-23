@@ -16,3 +16,13 @@
 .Toolbar nav {
   height: 100%;
 }
+
+.Navigation {
+  display: none;
+}
+
+@media (min-width: 500px) {
+  .Navigation {
+    display: initial;
+  }
+}
