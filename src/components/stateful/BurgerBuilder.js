@@ -31,7 +31,12 @@ class BurgerBuilder extends React.Component {
 
     this.handleAddIngredient = this.handleAddIngredient.bind(this);
     this.handleRemoveIngredient = this.handleRemoveIngredient.bind(this);
+
     this.handlePurchasingActivation = this.handlePurchasingActivation.bind(
+      this
+    );
+
+    this.handlePurchasingDeactivation = this.handlePurchasingDeactivation.bind(
       this
     );
   }
@@ -65,6 +70,10 @@ class BurgerBuilder extends React.Component {
 
   handlePurchasingActivation() {
     this.setState({ purchasing: true });
+  }
+
+  handlePurchasingDeactivation() {
+    this.setState({ purchasing: false });
   }
 
   handleRemoveIngredient(type) {
@@ -107,6 +116,8 @@ class BurgerBuilder extends React.Component {
           noIngredients: this.state.noIngredients,
           addIngredient: this.handleAddIngredient,
           removeIngredient: this.handleRemoveIngredient,
+          deactivatePurchasingMode: this.handlePurchasingDeactivation,
+          purchasingMode: this.state.purchasing,
         }}
       >
         <Burger ingredients={this.state.ingredients} />

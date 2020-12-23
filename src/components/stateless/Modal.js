@@ -1,23 +1,29 @@
 import React from "react";
-import PropTypes from "prop-types";
 import classes from "../../styles/Modal.css";
+import Backrop from "./Backdrop";
+import BurgerContext from "../../contexts/Burger";
 
 const Modal = (props) => {
   return (
-    <div
-      style={{
-        transform: props.show ? "translateY(0)" : "translateY(-100vh)",
-        opacity: props.show ? "1" : "0",
-      }}
-      className={classes.Modal}
-    >
-      {props.children}
-    </div>
+    <BurgerContext.Consumer>
+      {(context) => (
+        <React.Fragment>
+          <div
+            style={{
+              transform: context.purchasingMode
+                ? "translateY(0)"
+                : "translateY(-100vh)",
+              opacity: context.purchasingMode ? "1" : "0",
+            }}
+            className={classes.Modal}
+          >
+            {props.children}
+          </div>
+          <Backrop show={context.purchasingMode} />
+        </React.Fragment>
+      )}
+    </BurgerContext.Consumer>
   );
-};
-
-Modal.propTypes = {
-  show: PropTypes.bool,
 };
 
 export default Modal;
