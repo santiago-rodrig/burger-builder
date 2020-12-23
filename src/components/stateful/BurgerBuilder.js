@@ -19,6 +19,7 @@ class BurgerBuilder extends React.Component {
     this.state = {
       ingredients: [],
       price: 4,
+      purchasing: false,
 
       noIngredients: {
         salad: true,
@@ -30,6 +31,9 @@ class BurgerBuilder extends React.Component {
 
     this.handleAddIngredient = this.handleAddIngredient.bind(this);
     this.handleRemoveIngredient = this.handleRemoveIngredient.bind(this);
+    this.handlePurchasingActivation = this.handlePurchasingActivation.bind(
+      this
+    );
   }
 
   handleAddIngredient(type) {
@@ -57,6 +61,10 @@ class BurgerBuilder extends React.Component {
         noIngredients: { ...previousState.noIngredients, [type]: false },
       };
     });
+  }
+
+  handlePurchasingActivation() {
+    this.setState({ purchasing: true });
   }
 
   handleRemoveIngredient(type) {
@@ -107,8 +115,9 @@ class BurgerBuilder extends React.Component {
           purchasable={Object.values(this.state.noIngredients).some(
             (noIngredient) => !noIngredient
           )}
+          activatePurchasingMode={this.handlePurchasingActivation}
         />
-        <Modal>
+        <Modal show={this.state.purchasing}>
           <OrderSummary ingredients={this.state.ingredients} />
         </Modal>
       </BurgerContext.Provider>
