@@ -4,6 +4,7 @@ import BurgerControls from "../stateless/BurgerBuilder/BurgerControls";
 import BurgerContext from "../../contexts/Burger";
 import Modal from "../stateless/userInterface/Modal";
 import OrderSummary from "../stateless/BurgerBuilder/OrderSummary";
+import axios from "../../services/axiosClient";
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -31,6 +32,7 @@ class BurgerBuilder extends React.Component {
 
     this.handleAddIngredient = this.handleAddIngredient.bind(this);
     this.handleRemoveIngredient = this.handleRemoveIngredient.bind(this);
+    this.handlePurchase = this.handlePurchase.bind(this);
 
     this.handlePurchasingActivation = this.handlePurchasingActivation.bind(
       this
@@ -77,7 +79,25 @@ class BurgerBuilder extends React.Component {
   }
 
   handlePurchase() {
-    window.alert("Purchased!");
+    const order = {
+      ingredients: this.state.ingredients,
+      price: this.state.price,
+      customer: {
+        name: "Santiago Rodriguez",
+        address: {
+          street: "Las Palmas",
+          zipCode: "1083",
+          country: "Venezuela",
+        },
+        email: "test@test.com",
+      },
+      deliveryMethod: "fastest",
+    };
+
+    axios
+      .post("/orders.json", order)
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
   }
 
   handleRemoveIngredient(type) {
