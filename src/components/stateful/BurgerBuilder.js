@@ -1,10 +1,12 @@
 import React from "react";
+
 import Burger from "../stateless/BurgerBuilder/Burguer";
 import BurgerControls from "../stateless/BurgerBuilder/BurgerControls";
 import BurgerContext from "../../contexts/Burger";
 import Modal from "../stateless/userInterface/Modal";
 import OrderSummary from "../stateless/BurgerBuilder/OrderSummary";
 import axios from "../../services/axiosClient";
+import Spinner from "../stateless/userInterface/Spinner";
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -21,7 +23,7 @@ class BurgerBuilder extends React.Component {
       ingredients: [],
       price: 4,
       purchasing: false,
-
+      loading: false,
       noIngredients: {
         salad: true,
         bacon: true,
@@ -42,7 +44,6 @@ class BurgerBuilder extends React.Component {
       this
     );
   }
-
   handleAddIngredient(type) {
     this.setState((previousState) => {
       const ingredientIndex = previousState.ingredients.findIndex(
@@ -58,6 +59,7 @@ class BurgerBuilder extends React.Component {
             { ...ingredient, quantity: ingredient.quantity + 1 },
             ...previousState.ingredients.slice(ingredientIndex + 1),
           ],
+
           price: previousState.price + INGREDIENT_PRICES[type],
         };
       }
@@ -82,22 +84,31 @@ class BurgerBuilder extends React.Component {
     const order = {
       ingredients: this.state.ingredients,
       price: this.state.price,
+
       customer: {
         name: "Santiago Rodriguez",
+
         address: {
           street: "Las Palmas",
           zipCode: "1083",
           country: "Venezuela",
         },
+
         email: "test@test.com",
       },
+
       deliveryMethod: "fastest",
     };
 
+    this.setState({ loading: true });
+
     axios
       .post("/orders.json", order)
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
+      .then(() => this.setState({ loading: false, purchasing: false }))
+      .catch((error) => {
+        console.log(error);
+        this.setState({ loading: false, purchasing: false });
+      });
   }
 
   handleRemoveIngredient(type) {
@@ -114,6 +125,7 @@ class BurgerBuilder extends React.Component {
             ingredients: previousState.ingredients.filter(
               (ingredient) => ingredient.type !== type
             ),
+
             price: previousState.price - INGREDIENT_PRICES[type],
             noIngredients: { ...previousState.noIngredients, [type]: true },
           };
@@ -125,6 +137,7 @@ class BurgerBuilder extends React.Component {
             { ...ingredient, quantity: ingredient.quantity - 1 },
             ...previousState.ingredients.slice(ingredientIndex + 1),
           ],
+
           price: previousState.price - INGREDIENT_PRICES[type],
         };
       }
@@ -132,8 +145,21 @@ class BurgerBuilder extends React.Component {
       return {};
     });
   }
-
   render() {
+    let orderSummary = (
+      <OrderSummary
+        ingredients={this.state.ingredients}
+        price={this.state.price}
+        handlePurchasingModeDeactivation={this.handlePurchasingDeactivation}
+        handlePurchase={this.handlePurchase}
+        purchasing={this.state.purchasing}
+      />
+    );
+
+    if (this.state.loading) {
+      orderSummary = <Spinner />;
+    }
+
     return (
       <BurgerContext.Provider
         value={{
@@ -154,17 +180,10 @@ class BurgerBuilder extends React.Component {
           open={this.state.purchasing}
           handleClose={this.handlePurchasingDeactivation}
         >
-          <OrderSummary
-            ingredients={this.state.ingredients}
-            price={this.state.price}
-            handlePurchasingModeDeactivation={this.handlePurchasingDeactivation}
-            handlePurchase={this.handlePurchase}
-            purchasing={this.state.purchasing}
-          />
+          {orderSummary}
         </Modal>
       </BurgerContext.Provider>
     );
   }
 }
-
 export default BurgerBuilder;
