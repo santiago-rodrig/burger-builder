@@ -11,9 +11,7 @@ class AxiosErrorBoundary extends React.Component {
     this.state = { errorMessage: null };
 
     this.handleModalClose = this.handleModalClose.bind(this);
-  }
 
-  componentDidMount() {
     axios.interceptors.response.use(
       (response) => response,
       (error) => {
