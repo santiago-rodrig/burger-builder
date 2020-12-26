@@ -7,6 +7,7 @@ import Modal from "../stateless/userInterface/Modal";
 import OrderSummary from "../stateless/BurgerBuilder/OrderSummary";
 import axios from "../../services/axiosClient";
 import Spinner from "../stateless/userInterface/Spinner";
+import AxiosErrorBoundary from "../higuerOrder/AxiosErrorBoundary";
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -103,12 +104,8 @@ class BurgerBuilder extends React.Component {
     this.setState({ loading: true });
 
     axios
-      .post("/orders.json", order)
-      .then(() => this.setState({ loading: false, purchasing: false }))
-      .catch((error) => {
-        console.log(error);
-        this.setState({ loading: false, purchasing: false });
-      });
+      .post("/orders", order)
+      .then(() => this.setState({ loading: false, purchasing: false }));
   }
 
   handleRemoveIngredient(type) {
@@ -145,6 +142,7 @@ class BurgerBuilder extends React.Component {
       return {};
     });
   }
+
   render() {
     let orderSummary = (
       <OrderSummary
@@ -161,28 +159,30 @@ class BurgerBuilder extends React.Component {
     }
 
     return (
-      <BurgerContext.Provider
-        value={{
-          noIngredients: this.state.noIngredients,
-          addIngredient: this.handleAddIngredient,
-          removeIngredient: this.handleRemoveIngredient,
-        }}
-      >
-        <Burger ingredients={this.state.ingredients} />
-        <BurgerControls
-          price={this.state.price}
-          purchasable={Object.values(this.state.noIngredients).some(
-            (noIngredient) => !noIngredient
-          )}
-          activatePurchasingMode={this.handlePurchasingActivation}
-        />
-        <Modal
-          open={this.state.purchasing}
-          handleClose={this.handlePurchasingDeactivation}
+      <AxiosErrorBoundary>
+        <BurgerContext.Provider
+          value={{
+            noIngredients: this.state.noIngredients,
+            addIngredient: this.handleAddIngredient,
+            removeIngredient: this.handleRemoveIngredient,
+          }}
         >
-          {orderSummary}
-        </Modal>
-      </BurgerContext.Provider>
+          <Burger ingredients={this.state.ingredients} />
+          <BurgerControls
+            price={this.state.price}
+            purchasable={Object.values(this.state.noIngredients).some(
+              (noIngredient) => !noIngredient
+            )}
+            activatePurchasingMode={this.handlePurchasingActivation}
+          />
+          <Modal
+            open={this.state.purchasing}
+            handleClose={this.handlePurchasingDeactivation}
+          >
+            {orderSummary}
+          </Modal>
+        </BurgerContext.Provider>
+      </AxiosErrorBoundary>
     );
   }
 }
