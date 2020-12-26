@@ -12,19 +12,28 @@ class AxiosErrorBoundary extends React.Component {
 
     this.handleModalClose = this.handleModalClose.bind(this);
 
-    axios.interceptors.response.use(
-      (response) => response,
-      (error) => {
-        this.setState({ errorMessage: error.message });
-      }
+    this.responseInterceptorRef = React.createRef(
+      axios.interceptors.response.use(
+        (response) => response,
+        (error) => {
+          this.setState({ errorMessage: error.message });
+        }
+      )
     );
 
-    axios.interceptors.request.use(
-      (request) => request,
-      (error) => {
-        this.setState({ errorMessage: error.message });
-      }
+    this.requestInterceptorRef = React.createRef(
+      axios.interceptors.request.use(
+        (request) => request,
+        (error) => {
+          this.setState({ errorMessage: error.message });
+        }
+      )
     );
+  }
+
+  componentWillUnmount() {
+    axios.interceptors.response.eject(this.responseInterceptorRef.current);
+    axios.interceptors.response.eject(this.requestInterceptorRef.current);
   }
 
   handleModalClose() {
