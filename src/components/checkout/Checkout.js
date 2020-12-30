@@ -16,24 +16,26 @@ class Checkout extends React.Component {
   constructor(props) {
     super(props);
 
+    // setup state
+    const searchQuery = new URLSearchParams(props.location.search);
+    const ingredients = [];
+    let price;
+
+    for (const param of searchQuery.entries()) {
+      if (param[0] !== 'price') {
+        ingredients.push({type: param[0], quantity: parseInt(param[1])});
+      } else {
+        price = parseFloat(param[1]);
+      }
+    }
+
     this.state = {
-      ingredients: [],
+      ingredients,
+      price,
     };
 
     this.handleCancel = this.handleCancel.bind(this);
     this.handleContinue = this.handleContinue.bind(this);
-  }
-
-  /** Licfecycle hook called after the first render */
-  componentDidMount() {
-    const searchQuery = new URLSearchParams(this.props.location.search);
-    const updatedIngredients = [];
-
-    for (const param of searchQuery.entries()) {
-      updatedIngredients.push({type: param[0], quantity: parseInt(param[1])});
-    }
-
-    this.setState({ingredients: updatedIngredients});
   }
 
   /** Continues with the checkout process */
@@ -59,7 +61,13 @@ class Checkout extends React.Component {
         />
         <ReactRouter.Route
           path={this.props.match.path + '/contact_data'}
-          component={ContactData}
+          render={(routeProps) => (
+            <ContactData
+              {...routeProps}
+              ingredients={this.state.ingredients}
+              price={this.state.price}
+            />
+          )}
         />
       </div>
     );
