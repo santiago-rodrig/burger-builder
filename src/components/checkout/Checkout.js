@@ -15,16 +15,23 @@ class Checkout extends React.Component {
     super(props);
 
     this.state = {
-      ingredients: [
-        {type: 'salad', quantity: 1},
-        {type: 'meat', quantity: 1},
-        {type: 'cheese', quantity: 1},
-        {type: 'bacon', quantity: 1},
-      ],
+      ingredients: [],
     };
 
     this.handleCancel = this.handleCancel.bind(this);
     this.handleContinue = this.handleContinue.bind(this);
+  }
+
+  /** Licfecycle hook called after the first render */
+  componentDidMount() {
+    const searchQuery = new URLSearchParams(this.props.location.search);
+    const updatedIngredients = [];
+
+    for (const param of searchQuery.entries()) {
+      updatedIngredients.push({type: param[0], quantity: parseInt(param[1])});
+    }
+
+    this.setState({ingredients: updatedIngredients});
   }
 
   /** Continues with the checkout process */
@@ -55,6 +62,7 @@ class Checkout extends React.Component {
 
 Checkout.propTypes = {
   history: PropTypes.object,
+  location: PropTypes.object,
 };
 
 export default Checkout;
