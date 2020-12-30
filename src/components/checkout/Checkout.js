@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import * as ReactRouter from 'react-router-dom';
 
 import CheckoutSummary from './Summary';
+import ContactData from './ContactData';
 
 /** The checkout component
  * @class
@@ -55,6 +57,10 @@ class Checkout extends React.Component {
           handleContinue={this.handleContinue}
           ingredients={this.state.ingredients}
         />
+        <ReactRouter.Route
+          path={this.props.match.path + '/contact_data'}
+          component={ContactData}
+        />
       </div>
     );
   }
@@ -63,6 +69,7 @@ class Checkout extends React.Component {
 Checkout.propTypes = {
   history: PropTypes.object,
   location: PropTypes.object,
+  match: PropTypes.object,
 };
 
 export default Checkout;

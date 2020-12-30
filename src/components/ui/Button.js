@@ -20,16 +20,25 @@ const Button = (props) => {
   buttonClasses = buttonClasses.join(' ');
 
   return (
-    <button className={buttonClasses} type="button" onClick={props.handleClick}>
+    <button
+      className={buttonClasses}
+      type={props.htmlType}
+      onClick={props.handleClick || null}
+    >
       {props.children}
     </button>
   );
 };
 
+Button.defaultProps = {
+  htmlType: 'button',
+};
+
 Button.propTypes = {
   children: PropTypes.node.isRequired,
-  handleClick: PropTypes.func.isRequired,
+  handleClick: PropTypes.func,
   type: PropTypes.oneOf(['success', 'danger']),
+  htmlType: PropTypes.string,
 };
 
 export default Button;
