@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import * as ReactRouter from 'react-router-dom';
 
-import './styles/index.css';
-import App from './components/stateful/App';
+import './index.css';
+import App from './components/App';
 
 const app = (
   <ReactRouter.BrowserRouter>
