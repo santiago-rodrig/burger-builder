@@ -1,11 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Burger from '../stateless/BurgerBuilder/Burguer';
 import BurgerControls from '../stateless/BurgerBuilder/BurgerControls';
 import BurgerContext from '../../contexts/Burger';
 import Modal from '../stateless/userInterface/Modal';
 import OrderSummary from '../stateless/BurgerBuilder/OrderSummary';
-import axios from '../../services/axiosClient';
 import Spinner from '../stateless/userInterface/Spinner';
 import AxiosErrorBoundary from '../higuerOrder/AxiosErrorBoundary';
 
@@ -95,30 +95,31 @@ class BurgerBuilder extends React.Component {
 
   /** Purchases the burger with the current state */
   handlePurchase() {
-    const order = {
-      ingredients: this.state.ingredients,
-      price: this.state.price,
+    // const order = {
+    //   ingredients: this.state.ingredients,
+    //   price: this.state.price,
 
-      customer: {
-        name: 'Santiago Rodriguez',
+    //   customer: {
+    //     name: 'Santiago Rodriguez',
 
-        address: {
-          street: 'Las Palmas',
-          zipCode: '1083',
-          country: 'Venezuela',
-        },
+    //     address: {
+    //       street: 'Las Palmas',
+    //       zipCode: '1083',
+    //       country: 'Venezuela',
+    //     },
 
-        email: 'test@test.com',
-      },
+    //     email: 'test@test.com',
+    //   },
 
-      deliveryMethod: 'fastest',
-    };
+    //   deliveryMethod: 'fastest',
+    // };
 
-    this.setState({loading: true});
+    // this.setState({loading: true});
 
-    axios
-        .post('/orders.json', order)
-        .then(() => this.setState({loading: false, purchasing: false}));
+    // axios
+    //     .post('/orders.json', order)
+    //     .then(() => this.setState({loading: false, purchasing: false}));
+    this.props.history.push('/checkout');
   }
 
   /** Removes an ingredient from the state
@@ -205,4 +206,9 @@ class BurgerBuilder extends React.Component {
     );
   }
 }
+
+BurgerBuilder.propTypes = {
+  history: PropTypes.object,
+};
+
 export default BurgerBuilder;

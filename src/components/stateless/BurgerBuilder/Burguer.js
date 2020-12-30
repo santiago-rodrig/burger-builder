@@ -1,4 +1,6 @@
 import React from 'react';
+import * as ReactRouter from 'react-router-dom';
+
 import BurgerIngredient from './BurgerIngredient';
 import classes from '../../../styles/Burger.css';
 import PropTypes from 'prop-types';
@@ -39,4 +41,4 @@ Burger.propTypes = {
   ).isRequired,
 };
 
-export default Burger;
+export default ReactRouter.withRouter(Burger);
