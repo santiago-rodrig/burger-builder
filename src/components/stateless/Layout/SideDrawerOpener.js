@@ -1,6 +1,6 @@
-import React from "react";
-import LayoutContext from "../../../contexts/Layout";
-import classes from "../../../styles/SideDrawerOpener.css";
+import React from 'react';
+import LayoutContext from '../../../contexts/Layout';
+import classes from '../../../styles/SideDrawerOpener.css';
 
 const SideDrawerOpener = () => {
   return (

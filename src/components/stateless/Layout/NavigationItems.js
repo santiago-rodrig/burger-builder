@@ -1,6 +1,6 @@
-import React from "react";
-import NavigationItem from "./NavigationItem";
-import classes from "../../../styles/NavigationItems.css";
+import React from 'react';
+import NavigationItem from './NavigationItem';
+import classes from '../../../styles/NavigationItems.css';
 
 const NavigationItems = () => {
   return (

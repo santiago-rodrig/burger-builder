@@ -1,6 +1,14 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./styles/index.css";
-import App from "./components/stateful/App";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import * as ReactRouter from 'react-router-dom';
 
-ReactDOM.render(<App />, document.getElementById("root"));
+import './styles/index.css';
+import App from './components/stateful/App';
+
+const app = (
+  <ReactRouter.BrowserRouter>
+    <App />
+  </ReactRouter.BrowserRouter>
+);
+
+ReactDOM.render(app, document.getElementById('root'));

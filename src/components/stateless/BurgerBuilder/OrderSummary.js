@@ -1,23 +1,33 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Aux from "../../higuerOrder/Aux";
-import Button from "../userInterface/Button";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Aux from '../../higuerOrder/Aux';
+import Button from '../userInterface/Button';
 
+/** The order summary
+ * @class
+ */
 class OrderSummary extends React.Component {
+  /** Tests whether or not the component should perform an update
+   * @param {object} nextProps
+   * @return {boolean}
+   */
   shouldComponentUpdate(nextProps) {
     return nextProps.purchasing;
   }
 
+  /** Renders the component
+   * @return {React.ReactNode}
+   */
   render() {
     const ingredientItemsJsx = this.props.ingredients.map(
-      (ingredient, index) => (
-        <li
-          key={`${ingredient.type}${index}-item`}
-          style={{ textTransform: "capitalize" }}
-        >
-          {ingredient.type} x {ingredient.quantity}
-        </li>
-      )
+        (ingredient, index) => (
+          <li
+            key={`${ingredient.type}${index}-item`}
+            style={{textTransform: 'capitalize'}}
+          >
+            {ingredient.type} x {ingredient.quantity}
+          </li>
+        ),
     );
 
     return (
@@ -45,10 +55,10 @@ class OrderSummary extends React.Component {
 
 OrderSummary.propTypes = {
   ingredients: PropTypes.arrayOf(
-    PropTypes.exact({
-      type: PropTypes.string,
-      quantity: PropTypes.number,
-    })
+      PropTypes.exact({
+        type: PropTypes.string,
+        quantity: PropTypes.number,
+      }),
   ).isRequired,
 
   price: PropTypes.number.isRequired,

@@ -1,10 +1,10 @@
-import React from "react";
-import Logo from "./Logo";
-import NavigationItems from "./NavigationItems";
-import classes from "../../../styles/SideDrawer.css";
-import Backdrop from "../userInterface/Backdrop";
-import PropTypes from "prop-types";
-import Aux from "../../higuerOrder/Aux";
+import React from 'react';
+import Logo from './Logo';
+import NavigationItems from './NavigationItems';
+import classes from '../../../styles/SideDrawer.css';
+import Backdrop from '../userInterface/Backdrop';
+import PropTypes from 'prop-types';
+import Aux from '../../higuerOrder/Aux';
 
 const SideDrawer = (props) => {
   let attachedClasses = [classes.SideDrawer, classes.Close];
@@ -13,7 +13,7 @@ const SideDrawer = (props) => {
     attachedClasses.splice(1, 1, [classes.Open]);
   }
 
-  attachedClasses = attachedClasses.join(" ");
+  attachedClasses = attachedClasses.join(' ');
 
   return (
     <Aux>

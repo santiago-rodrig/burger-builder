@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 
-import Burger from "../stateless/BurgerBuilder/Burguer";
-import BurgerControls from "../stateless/BurgerBuilder/BurgerControls";
-import BurgerContext from "../../contexts/Burger";
-import Modal from "../stateless/userInterface/Modal";
-import OrderSummary from "../stateless/BurgerBuilder/OrderSummary";
-import axios from "../../services/axiosClient";
-import Spinner from "../stateless/userInterface/Spinner";
-import AxiosErrorBoundary from "../higuerOrder/AxiosErrorBoundary";
+import Burger from '../stateless/BurgerBuilder/Burguer';
+import BurgerControls from '../stateless/BurgerBuilder/BurgerControls';
+import BurgerContext from '../../contexts/Burger';
+import Modal from '../stateless/userInterface/Modal';
+import OrderSummary from '../stateless/BurgerBuilder/OrderSummary';
+import axios from '../../services/axiosClient';
+import Spinner from '../stateless/userInterface/Spinner';
+import AxiosErrorBoundary from '../higuerOrder/AxiosErrorBoundary';
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -16,7 +16,13 @@ const INGREDIENT_PRICES = {
   bacon: 0.7,
 };
 
+/** The burger builder component
+ * @class
+ */
 class BurgerBuilder extends React.Component {
+  /** The burger builder constructor
+   * @param {object} props
+   */
   constructor(props) {
     super(props);
 
@@ -38,17 +44,21 @@ class BurgerBuilder extends React.Component {
     this.handlePurchase = this.handlePurchase.bind(this);
 
     this.handlePurchasingActivation = this.handlePurchasingActivation.bind(
-      this
+        this,
     );
 
     this.handlePurchasingDeactivation = this.handlePurchasingDeactivation.bind(
-      this
+        this,
     );
   }
+
+  /** Adds an ingredient to the state
+   * @param {string} type
+   */
   handleAddIngredient(type) {
     this.setState((previousState) => {
       const ingredientIndex = previousState.ingredients.findIndex(
-        (ingredient) => ingredient.type === type
+          (ingredient) => ingredient.type === type,
       );
 
       if (ingredientIndex >= 0) {
@@ -57,7 +67,7 @@ class BurgerBuilder extends React.Component {
         return {
           ingredients: [
             ...previousState.ingredients.slice(0, ingredientIndex),
-            { ...ingredient, quantity: ingredient.quantity + 1 },
+            {...ingredient, quantity: ingredient.quantity + 1},
             ...previousState.ingredients.slice(ingredientIndex + 1),
           ],
 
@@ -66,52 +76,58 @@ class BurgerBuilder extends React.Component {
       }
 
       return {
-        ingredients: [...previousState.ingredients, { type, quantity: 1 }],
+        ingredients: [...previousState.ingredients, {type, quantity: 1}],
         price: previousState.price + INGREDIENT_PRICES[type],
-        noIngredients: { ...previousState.noIngredients, [type]: false },
+        noIngredients: {...previousState.noIngredients, [type]: false},
       };
     });
   }
 
+  /** Activates purchasing mode state */
   handlePurchasingActivation() {
-    this.setState({ purchasing: true });
+    this.setState({purchasing: true});
   }
 
+  /** Deactivates purchasing mode state */
   handlePurchasingDeactivation() {
-    this.setState({ purchasing: false });
+    this.setState({purchasing: false});
   }
 
+  /** Purchases the burger with the current state */
   handlePurchase() {
     const order = {
       ingredients: this.state.ingredients,
       price: this.state.price,
 
       customer: {
-        name: "Santiago Rodriguez",
+        name: 'Santiago Rodriguez',
 
         address: {
-          street: "Las Palmas",
-          zipCode: "1083",
-          country: "Venezuela",
+          street: 'Las Palmas',
+          zipCode: '1083',
+          country: 'Venezuela',
         },
 
-        email: "test@test.com",
+        email: 'test@test.com',
       },
 
-      deliveryMethod: "fastest",
+      deliveryMethod: 'fastest',
     };
 
-    this.setState({ loading: true });
+    this.setState({loading: true});
 
     axios
-      .post("/orders.json", order)
-      .then(() => this.setState({ loading: false, purchasing: false }));
+        .post('/orders.json', order)
+        .then(() => this.setState({loading: false, purchasing: false}));
   }
 
+  /** Removes an ingredient from the state
+   * @param {string} type
+   */
   handleRemoveIngredient(type) {
     this.setState((previousState) => {
       const ingredientIndex = previousState.ingredients.findIndex(
-        (ingredient) => ingredient.type === type
+          (ingredient) => ingredient.type === type,
       );
 
       if (ingredientIndex >= 0) {
@@ -120,18 +136,18 @@ class BurgerBuilder extends React.Component {
         if (ingredient.quantity === 1) {
           return {
             ingredients: previousState.ingredients.filter(
-              (ingredient) => ingredient.type !== type
+                (ingredient) => ingredient.type !== type,
             ),
 
             price: previousState.price - INGREDIENT_PRICES[type],
-            noIngredients: { ...previousState.noIngredients, [type]: true },
+            noIngredients: {...previousState.noIngredients, [type]: true},
           };
         }
 
         return {
           ingredients: [
             ...previousState.ingredients.slice(0, ingredientIndex),
-            { ...ingredient, quantity: ingredient.quantity - 1 },
+            {...ingredient, quantity: ingredient.quantity - 1},
             ...previousState.ingredients.slice(ingredientIndex + 1),
           ],
 
@@ -143,6 +159,9 @@ class BurgerBuilder extends React.Component {
     });
   }
 
+  /** Renders the component
+   * @return {React.ReactNode}
+   */
   render() {
     let orderSummary = (
       <OrderSummary
@@ -171,7 +190,7 @@ class BurgerBuilder extends React.Component {
           <BurgerControls
             price={this.state.price}
             purchasable={Object.values(this.state.noIngredients).some(
-              (noIngredient) => !noIngredient
+                (noIngredient) => !noIngredient,
             )}
             activatePurchasingMode={this.handlePurchasingActivation}
           />

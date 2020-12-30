@@ -1,8 +1,8 @@
-import React from "react";
-import classes from "../../../styles/Toolbar.css";
-import Logo from "./Logo";
-import NavigationItems from "./NavigationItems";
-import SideDrawerOpener from "./SideDrawerOpener";
+import React from 'react';
+import classes from '../../../styles/Toolbar.css';
+import Logo from './Logo';
+import NavigationItems from './NavigationItems';
+import SideDrawerOpener from './SideDrawerOpener';
 
 const Toolbar = () => {
   return (
