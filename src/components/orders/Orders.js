@@ -64,11 +64,7 @@ class Orders extends React.Component {
       />
     ));
 
-    return (
-      <ul className={classes.Orders}>
-        {ordersJsx}
-      </ul>
-    );
+    return <ul className={classes.Orders}>{ordersJsx}</ul>;
   }
 }
 

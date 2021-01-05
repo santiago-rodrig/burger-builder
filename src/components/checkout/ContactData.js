@@ -5,6 +5,7 @@ import Button from '../ui/Button';
 import classes from './ContactData.css';
 import axios from '../../utility/axiosClient';
 import Spinner from '../ui/Spinner';
+import Input from '../ui/Input';
 
 /** The contact data component */
 class ContactData extends React.Component {
@@ -57,12 +58,10 @@ class ContactData extends React.Component {
 
     this.setState({loading: true});
 
-    axios
-        .post('/orders.json', order)
-        .then(() => {
-          this.setState({loading: false});
-          this.props.history.push('/');
-        });
+    axios.post('/orders.json', order).then(() => {
+      this.setState({loading: false});
+      this.props.history.push('/');
+    });
   }
 
   /** Renders the contact data component
@@ -71,10 +70,15 @@ class ContactData extends React.Component {
   render() {
     let formJsx = (
       <form onSubmit={this.handleOrder}>
-        <input type="text" name="name" placeholder="Bob Smith" />
-        <input type="text" name="email" placeholder="bob.smith@example.com" />
-        <input type="text" name="street" placeholder="Main St." />
-        <input type="text" name="postalCode" placeholder="23441" />
+        <Input
+          inputType="input"
+          type="text"
+          name="name"
+          placeholder="Bob Smith"
+        />
+        <Input type="text" name="email" placeholder="bob.smith@example.com" />
+        <Input type="text" name="street" placeholder="Main St." />
+        <Input type="text" name="postalCode" placeholder="23441" />
         <Button htmlType="submit" type="success">
           ORDER
         </Button>
@@ -101,7 +105,7 @@ ContactData.propTypes = {
         quantity: PropTypes.number,
       }),
   ).isRequired,
-  price: PropTypes.number.isRequired,
+  price: PropTypes.number,
   history: PropTypes.object.isRequired,
 };
 

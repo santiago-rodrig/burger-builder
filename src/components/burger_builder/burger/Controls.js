@@ -9,9 +9,7 @@ const BurgerControls = (props) => {
       <p>Current price: {props.price.toFixed(2)}</p>
       <BurgerControl ingredientDescriptor={{label: 'Salad', type: 'salad'}} />
       <BurgerControl ingredientDescriptor={{label: 'Bacon', type: 'bacon'}} />
-      <BurgerControl
-        ingredientDescriptor={{label: 'Cheese', type: 'cheese'}}
-      />
+      <BurgerControl ingredientDescriptor={{label: 'Cheese', type: 'cheese'}} />
       <BurgerControl ingredientDescriptor={{label: 'Meat', type: 'meat'}} />
       <button
         onClick={props.activatePurchasingMode}

@@ -94,9 +94,12 @@ class BurgerBuilder extends React.Component {
 
   /** Purchases the burger with the current state */
   handlePurchase() {
-    const searchQuery = encodeURI(this.state.ingredients.map(
-        (ingredient) => `${ingredient.type}=${ingredient.quantity}`,
-    ).concat([`price=${this.state.price}`]).join('&'));
+    const searchQuery = encodeURI(
+        this.state.ingredients
+            .map((ingredient) => `${ingredient.type}=${ingredient.quantity}`)
+            .concat([`price=${this.state.price}`])
+            .join('&'),
+    );
 
     this.props.history.push({
       pathname: '/checkout',
